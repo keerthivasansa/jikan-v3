@@ -11,4 +11,5 @@ RUN	git clone --branch=v3 --depth=1 https://github.com/jikan-me/jikan-rest.git .
 	&& composer install --prefer-dist --no-progress --classmap-authoritative  --no-interaction \
 	&& composer update jikan-me/jikan
 ADD	.env	/run-jikan.sh	./
+RUN chmod +x run-jikan.sh
 ENTRYPOINT	["./run-jikan.sh"]
