@@ -7,12 +7,30 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - jikan-redis
+      - mongodb
     ports:
       - "8000:8000"
     networks:
-      - default
+      - jikan-network
     restart: always
 
   jikan-redis:
     image: redis
     restart: always
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: jikan
+      MONGO_INITDB_ROOT_PASSWORD: mongo123
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  dbdata6:
+
+networks:
+  jikan-network:
+    driver: bridge
